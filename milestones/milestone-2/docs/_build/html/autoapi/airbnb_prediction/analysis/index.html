@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>airbnb_prediction.analysis &mdash; Airbnb Prediction  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Airbnb Prediction
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Airbnb Prediction</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">airbnb_prediction.analysis</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/autoapi/airbnb_prediction/analysis/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-airbnb_prediction.analysis">
+<span id="airbnb-prediction-analysis"></span><h1><a class="reference internal" href="#module-airbnb_prediction.analysis" title="airbnb_prediction.analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">airbnb_prediction.analysis</span></code></a><a class="headerlink" href="#module-airbnb_prediction.analysis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.load_data" title="airbnb_prediction.analysis.load_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_data</span></code></a>(url='http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz', save=False)</p></td>
+<td><p>Load data from InsideAirbnb.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.wrangle_data" title="airbnb_prediction.analysis.wrangle_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrangle_data</span></code></a>(dataframe)</p></td>
+<td><p>Wrangle data into a format suitable for ML.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.split_data" title="airbnb_prediction.analysis.split_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_data</span></code></a>(dataframe, save=False, test_fraction=0.2, random_state=123)</p></td>
+<td><p>Split data into train and test sets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.train_test_table" title="airbnb_prediction.analysis.train_test_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_test_table</span></code></a>(train_df, test_df)</p></td>
+<td><p>Print train and test data summary statistics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.df_to_xy" title="airbnb_prediction.analysis.df_to_xy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">df_to_xy</span></code></a>(train_df, test_df, normalize=True)</p></td>
+<td><p>Split dataframes into X (features) and y (target) subsets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.k_optimization" title="airbnb_prediction.analysis.k_optimization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_optimization</span></code></a>(X_train, y_train, k_range=range(1, 31), cv_folds=10)</p></td>
+<td><p>Report cross-validation results for kNN regression model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.test_model" title="airbnb_prediction.analysis.test_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_model</span></code></a>(X_train, y_train, X_test, y_test, k=5)</p></td>
+<td><p>Report cross-validation results for kNN regression model.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="airbnb_prediction.analysis.load_data">
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.load_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load data from InsideAirbnb.</p>
+<p>Data is downloaded from remote location if it doesn’t already
+exist and can be saved if specified. If it does exist, it is
+loaded from the local source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL to data on InsideAirbnb.</p></li>
+<li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Save downloaded file locally as data/airbnb.csv. By default, False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of Airbnb listing data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="airbnb_prediction.analysis.wrangle_data">
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">wrangle_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#wrangle_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.wrangle_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrangle data into a format suitable for ML.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – DataFrame of Airbnb listing data to wrangle.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A copy of dataframe wrangled into a format suitable for ML.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="airbnb_prediction.analysis.split_data">
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">123</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.split_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split data into train and test sets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – DataFrame of Airbnb listing data to wrangle.</p></li>
+<li><p><strong>test_fraction</strong> (<em>float</em>) – Fraction of data to be reserved for testing, by default 0.2</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed, by default 123</p></li>
+<li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save train and test sets as csv files, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>train</strong> (<em>pd.DataFrame</em>) – Train data set.</p></li>
+<li><p><strong>test</strong> (<em>pd.DataFrame</em>) – Test data set.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="airbnb_prediction.analysis.train_test_table">
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">train_test_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#train_test_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.train_test_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print train and test data summary statistics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_df</strong> (<em>pd.DataFrame</em>) – Train data.</p></li>
+<li><p><strong>test_df</strong> (<em>pd.DataFrame</em>) – Test data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of train and test data summary statistics.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="airbnb_prediction.analysis.df_to_xy">
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">df_to_xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#df_to_xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.df_to_xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split dataframes into X (features) and y (target) subsets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_df</strong> (<em>pd.DataFrame</em>) – Train data.</p></li>
+<li><p><strong>test_df</strong> (<em>pd.DataFrame</em>) – Test data.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to normalize features between 0 and 1, by default True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X_train</strong> (<em>pd.DataFrame</em>) – Train feature data.</p></li>
+<li><p><strong>y_train</strong> (<em>pd.DataFrame</em>) – Train target data.</p></li>
+<li><p><strong>X_test</strong> (<em>pd.DataFrame</em>) – Test feature data.</p></li>
+<li><p><strong>y_test</strong> (<em>pd.DataFrame</em>) – Test target data.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="airbnb_prediction.analysis.k_optimization">
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">k_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">range(1,</span> <span class="pre">31)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_folds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#k_optimization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.k_optimization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report cross-validation results for kNN regression model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> (<em>array-like</em>) – Feature data of shape (n_samples, n_features).</p></li>
+<li><p><strong>y_train</strong> (<em>array-like</em>) – Target values of shape (n_samples,).</p></li>
+<li><p><strong>k_range</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Iterable of values of k to trial for model fitting, by default range(1, 30).</p></li>
+<li><p><strong>cv_folds</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of folds to use in cross-validation, by default 10.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of cross-validation results.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="airbnb_prediction.analysis.test_model">
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">test_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#test_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.test_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report cross-validation results for kNN regression model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> (<em>array-like</em>) – Train feature data of shape (n_samples, n_features).</p></li>
+<li><p><strong>y_train</strong> (<em>array-like</em>) – Train target values of shape (n_samples,).</p></li>
+<li><p><strong>X_test</strong> (<em>array-like</em>) – Test feature data of shape (n_samples, n_features).</p></li>
+<li><p><strong>y_test</strong> (<em>array-like</em>) – Test target values of shape (n_samples,).</p></li>
+<li><p><strong>k</strong> (<em>integer</em><em>, </em><em>optional</em>) – Value of k to use in sklearn.neighbors.KNeighborsRegressor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>float</em> – Test score.</p></li>
+<li><p><em>sklearn.neighbors.KNeighborsRegressor</em> – Trained model.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Tomas Beuzen.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

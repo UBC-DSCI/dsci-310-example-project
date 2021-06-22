@@ -1,0 +1,1005 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Usage &mdash; Airbnb Prediction  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Airbnb Prediction
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Import">Import</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Data">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#EDA">EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Modelling">Modelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Airbnb Prediction</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/usage.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Usage">
+<h1>Usage<a class="headerlink" href="#Usage" title="Permalink to this headline">¶</a></h1>
+<p>Below is an example workflow using <code class="docutils literal notranslate"><span class="pre">airbnb_prediction</span></code>:</p>
+<div class="section" id="Import">
+<h2>Import<a class="headerlink" href="#Import" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">airbnb_prediction</span> <span class="k">as</span> <span class="nn">air</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Summary">
+<h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">airbnb_predict</span></code> can be used to build a k-nearest neighbors regression model that uses characteristics of an Airbnb property and host (price, bedrooms, host response rate, etc.) to predict the nightly price of the property. It relies on data from <a class="reference external" href="http://insideairbnb.com/">InsideAirbnb</a>. This model can then help prospective and exisiting hosts determine how to price their new or existing property.</p>
+<p>The default data set for <code class="docutils literal notranslate"><span class="pre">airbnb_predict</span></code> is all the active Airbnb listings for Vancouver, Canada from April 2021. However, a custom URL to a different data set may be used if desired.</p>
+<p><a class="reference external" href="http://insideairbnb.com/">InsideAirbnb</a> data sets comprise 74 features, but <code class="docutils literal notranslate"><span class="pre">airbnb_predict</span></code> focuses on just a subset of the data comprising the following features:</p>
+<ul class="simple">
+<li><p>The host response rate (<code class="docutils literal notranslate"><span class="pre">host_response_rate</span></code>);</p></li>
+<li><p>The host acceptance rate (<code class="docutils literal notranslate"><span class="pre">host_acceptance_rate</span></code>);</p></li>
+<li><p>The property location (<code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>);</p></li>
+<li><p>Number of bedrooms, number of beds, and number of guests the property accommodates (<code class="docutils literal notranslate"><span class="pre">bedrooms</span></code>, <code class="docutils literal notranslate"><span class="pre">beds</span></code> and <code class="docutils literal notranslate"><span class="pre">accommodates</span></code>);</p></li>
+<li><p>The minimum number of nights a guests must stay (<code class="docutils literal notranslate"><span class="pre">minimum_nights</span></code>); and,</p></li>
+<li><p>The review score of the property and number of reviews (<code class="docutils literal notranslate"><span class="pre">review_scores_rating</span></code>).</p></li>
+</ul>
+<p>The target variable we wish to predict is a property’s nightly price (<code class="docutils literal notranslate"><span class="pre">price</span></code>). This is a number greater than 0.</p>
+</div>
+<div class="section" id="Data">
+<h2>Data<a class="headerlink" href="#Data" title="Permalink to this headline">¶</a></h2>
+<p>The data set is hosted on <a class="reference external" href="http://insideairbnb.com/">InsideAirbnb</a>. We’ll download the data using the <code class="docutils literal notranslate"><span class="pre">analysis.load_data()</span></code> function, which downloads data for all the active Airbnb listings for Vancouver, Canada in April 2021:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downloading data from online source...
+</pre></div></div>
+</div>
+<p>Let’s take a quick look at our column data types and how many non-null values they have:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 4299 entries, 0 to 4298
+Data columns (total 11 columns):
+ #   Column                Non-Null Count  Dtype
+---  ------                --------------  -----
+ 0   host_response_rate    2991 non-null   object
+ 1   host_acceptance_rate  3099 non-null   object
+ 2   latitude              4299 non-null   float64
+ 3   longitude             4299 non-null   float64
+ 4   accommodates          4299 non-null   int64
+ 5   bedrooms              3987 non-null   float64
+ 6   beds                  4263 non-null   float64
+ 7   price                 4299 non-null   object
+ 8   minimum_nights        4299 non-null   int64
+ 9   number_of_reviews     4299 non-null   int64
+ 10  review_scores_rating  3474 non-null   float64
+dtypes: float64(5), int64(3), object(3)
+memory usage: 369.6+ KB
+</pre></div></div>
+</div>
+<p>The data downloaded from InsideAirbnb requires some wrangling before we can use it. We’ll use the function <code class="docutils literal notranslate"><span class="pre">analysis.wrangle_data(data)</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">data</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">wrangle_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>host_response_rate</th>
+      <th>host_acceptance_rate</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>accommodates</th>
+      <th>bedrooms</th>
+      <th>beds</th>
+      <th>price</th>
+      <th>minimum_nights</th>
+      <th>number_of_reviews</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>93</td>
+      <td>87</td>
+      <td>49.28872</td>
+      <td>-123.12046</td>
+      <td>5</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>150.0</td>
+      <td>90</td>
+      <td>16</td>
+      <td>93.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100</td>
+      <td>57</td>
+      <td>49.28201</td>
+      <td>-123.12669</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>85.0</td>
+      <td>30</td>
+      <td>430</td>
+      <td>93.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100</td>
+      <td>78</td>
+      <td>49.25622</td>
+      <td>-123.06607</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>145.0</td>
+      <td>30</td>
+      <td>88</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100</td>
+      <td>0</td>
+      <td>49.26557</td>
+      <td>-123.09600</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>51.0</td>
+      <td>30</td>
+      <td>118</td>
+      <td>91.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100</td>
+      <td>100</td>
+      <td>49.27569</td>
+      <td>-123.07057</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>79.0</td>
+      <td>1</td>
+      <td>390</td>
+      <td>100.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Now we need to split into training and testing sets:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">airbnb_train</span><span class="p">,</span> <span class="n">airbnb_test</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">air</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">train_test_table</span><span class="p">(</span><span class="n">airbnb_train</span><span class="p">,</span> <span class="n">airbnb_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Partition</th>
+      <th>Fraction</th>
+      <th>Median price</th>
+      <th>Mean price</th>
+      <th>Std price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Train</td>
+      <td>0.8</td>
+      <td>113.0</td>
+      <td>132.7</td>
+      <td>80.7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Test</td>
+      <td>0.2</td>
+      <td>112.5</td>
+      <td>133.5</td>
+      <td>79.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="EDA">
+<h2>EDA<a class="headerlink" href="#EDA" title="Permalink to this headline">¶</a></h2>
+<p>We can make a quick regression plot of our features vs our target using the <code class="docutils literal notranslate"><span class="pre">plotting.reg_subplots()</span></code> function:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">reg_subplots</span><span class="p">(</span><span class="n">airbnb_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/usage_16_0.png" src="_images/usage_16_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Modelling">
+<h2>Modelling<a class="headerlink" href="#Modelling" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">airbnb_prediction</span></code> uses k-nearest neighbors regression to predict Airbnb nightly prices from our features. A key hyperparameter for this model is <code class="docutils literal notranslate"><span class="pre">k</span></code>. To find the best value of the hyperparameter <code class="docutils literal notranslate"><span class="pre">k</span></code> (number of nearest neighbours), we can split out data set into X (features) and y (target) subsets and then use the <code class="docutils literal notranslate"><span class="pre">analysis.k_optimization()</span></code> function to evaluate different values of <code class="docutils literal notranslate"><span class="pre">k</span></code> using cross-validation.</p>
+<p>will perform 10-fold cross validation using root-mean-squared-error as our metric of model prediction performance.</p>
+<p>Note that our input features are on different scales, e.g., latitude is in degrees and number of bedrooms is an integer. To allow our k-nearest neighbors model to equally weight features, we should scale the data before training. We’ll use the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> function <code class="docutils literal notranslate"><span class="pre">MinMaxScaler()</span></code> to normalize our features to be between 0 and 1.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">df_to_xy</span><span class="p">(</span><span class="n">airbnb_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;host_response_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;host_acceptance_rate&quot;</span><span class="p">]),</span>
+                                                     <span class="n">airbnb_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;host_response_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;host_acceptance_rate&quot;</span><span class="p">]),</span>
+                                                     <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We’ll explore model predictive performance on values of <code class="docutils literal notranslate"><span class="pre">k</span></code> from 1 to 30:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cv_results_df</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">k_optimization</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">cv_results_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Mean&quot;</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>k</th>
+      <th>Mean</th>
+      <th>Min</th>
+      <th>Max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>24</td>
+      <td>41.970845</td>
+      <td>36.810743</td>
+      <td>48.842118</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21</td>
+      <td>41.996267</td>
+      <td>36.538153</td>
+      <td>48.732358</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18</td>
+      <td>42.030654</td>
+      <td>36.097055</td>
+      <td>49.175368</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>25</td>
+      <td>42.032180</td>
+      <td>36.709157</td>
+      <td>49.023373</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>22</td>
+      <td>42.039393</td>
+      <td>36.386364</td>
+      <td>49.028204</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>20</td>
+      <td>42.040843</td>
+      <td>36.578313</td>
+      <td>48.860241</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>19</td>
+      <td>42.060309</td>
+      <td>36.726379</td>
+      <td>48.796449</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>15</td>
+      <td>42.067260</td>
+      <td>36.802008</td>
+      <td>49.832932</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>23</td>
+      <td>42.082694</td>
+      <td>36.670246</td>
+      <td>49.280513</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>42.085668</td>
+      <td>36.372892</td>
+      <td>50.562651</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">altair</span></code> library to make a plot of these results:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">air</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">cv_results</span><span class="p">(</span><span class="n">cv_results_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="altair-viz-594b6d391b1b4eb0b8775193c0e9f255"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-594b6d391b1b4eb0b8775193c0e9f255") {
+      outputDiv = document.getElementById("altair-viz-594b6d391b1b4eb0b8775193c0e9f255");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "axis": {"labelFontSize": 14, "titleFontSize": 14}}, "layer": [{"mark": {"type": "line", "point": true, "strokeWidth": 2}, "encoding": {"x": {"type": "quantitative", "field": "k"}, "y": {"type": "quantitative", "field": "Mean"}}}, {"mark": "errorbar", "encoding": {"x": {"type": "quantitative", "field": "k"}, "y": {"type": "quantitative", "field": "Min", "title": "MAE"}, "y2": {"field": "Max"}}}], "data": {"name": "data-b2b0b3e32858265275ac11152e22ba3c"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-b2b0b3e32858265275ac11152e22ba3c": [{"k": 1, "Mean": 50.88504797633648, "Min": 45.65269461077844, "Max": 60.95180722891566}, {"k": 2, "Mean": 46.64884207488637, "Min": 41.00898203592814, "Max": 54.94879518072289}, {"k": 3, "Mean": 44.252404828896424, "Min": 39.82931726907631, "Max": 54.41365461847388}, {"k": 4, "Mean": 43.48505789625568, "Min": 39.07680722891566, "Max": 52.70632530120482}, {"k": 5, "Mean": 43.14466272274727, "Min": 39.059036144578315, "Max": 51.21686746987952}, {"k": 6, "Mean": 42.87865413750812, "Min": 38.08433734939759, "Max": 52.355421686746986}, {"k": 7, "Mean": 42.73766013583848, "Min": 37.44922547332186, "Max": 51.689328743545616}, {"k": 8, "Mean": 42.27114385686458, "Min": 36.213855421686745, "Max": 50.806475903614455}, {"k": 9, "Mean": 42.360381646345864, "Min": 36.47121820615797, "Max": 51.54149933065597}, {"k": 10, "Mean": 42.08566770074309, "Min": 36.37289156626506, "Max": 50.562650602409626}, {"k": 11, "Mean": 42.09144361878653, "Min": 36.92552026286966, "Max": 50.79463307776562}, {"k": 12, "Mean": 42.12745593151047, "Min": 36.719377510040154, "Max": 50.13002008032128}, {"k": 13, "Mean": 42.158750894873826, "Min": 36.68674698795181, "Max": 50.35356811862837}, {"k": 14, "Mean": 42.19649092520639, "Min": 37.18502581755594, "Max": 50.646299483648875}, {"k": 15, "Mean": 42.06726041892119, "Min": 36.80200803212852, "Max": 49.83293172690763}, {"k": 16, "Mean": 42.126078565760054, "Min": 36.44691265060241, "Max": 50.00414156626506}, {"k": 17, "Mean": 42.10635957001659, "Min": 36.52976612331679, "Max": 49.484408221119764}, {"k": 18, "Mean": 42.03065355233308, "Min": 36.09705488621152, "Max": 49.17536813922356}, {"k": 19, "Mean": 42.060308552204404, "Min": 36.72637920101459, "Max": 48.796448953709564}, {"k": 20, "Mean": 42.040843012769635, "Min": 36.57831325301205, "Max": 48.860240963855425}, {"k": 21, "Mean": 41.99626684668529, "Min": 36.53815261044176, "Max": 48.73235800344234}, {"k": 22, "Mean": 42.039392900945096, "Min": 36.38636363636364, "Max": 49.028203723986856}, {"k": 23, "Mean": 42.08269448530911, "Min": 36.67024620220011, "Max": 49.28051335777893}, {"k": 24, "Mean": 41.97084535747781, "Min": 36.81074297188756, "Max": 48.84211847389558}, {"k": 25, "Mean": 42.03217964071856, "Min": 36.70915662650602, "Max": 49.02337349397591}, {"k": 26, "Mean": 42.109168225180774, "Min": 36.71339202965709, "Max": 49.11329935125115}, {"k": 27, "Mean": 42.1515785029673, "Min": 36.75680499776885, "Max": 49.34024988844266}, {"k": 28, "Mean": 42.14460266214558, "Min": 36.561101549053355, "Max": 49.202667814113596}, {"k": 29, "Mean": 42.131648833616524, "Min": 36.886373078520975, "Max": 49.05130868300789}, {"k": 30, "Mean": 42.192186350191186, "Min": 36.80843373493976, "Max": 49.02128514056225}]}}, {"mode": "vega-lite"});
+</script></div>
+</div>
+</div>
+<div class="section" id="Results">
+<h2>Results<a class="headerlink" href="#Results" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we can get the performance of the model on the withheld test data. Ideally, the performance on the test set will be similar to the performance observed during cross-validation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mae</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">air</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">test_model</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test MAE: $</span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Test MAE: $40.98
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Tomas Beuzen.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

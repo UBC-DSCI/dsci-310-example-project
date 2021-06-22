@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "airbnb_prediction"
+version = "0.1.0"
+description = "A package for r predicting Airbnb property prices in Vancouver."
+authors = ["Tomas Beuzen"]
+license = "Creative Commons Attribution 4.0"
+readme = "README.md"
+documentation = "https://airbnb_prediction.readthedocs.io/en/latest/"
+homepage = "https://github.com/TomasBeuzen/airbnb_prediction"
+repository = "https://github.com/TomasBeuzen/airbnb_prediction"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^1.2.4"
+
+[tool.poetry.dev-dependencies]
+Sphinx = "^4.0.2"
+nbsphinx = "^0.8.6"
+ipykernel = "^5.5.5"
+sphinx-autoapi = "^1.8.1"
+sphinx-rtd-theme = "^0.5.2"
+pytest = "^6.2.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,136 @@
+:mod:`airbnb_prediction.analysis`
+=================================
+
+.. py:module:: airbnb_prediction.analysis
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   airbnb_prediction.analysis.load_data
+   airbnb_prediction.analysis.wrangle_data
+   airbnb_prediction.analysis.split_data
+   airbnb_prediction.analysis.train_test_table
+   airbnb_prediction.analysis.df_to_xy
+   airbnb_prediction.analysis.k_optimization
+   airbnb_prediction.analysis.test_model
+
+
+
+.. function:: load_data(url='http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz', save=False)
+
+   Load data from InsideAirbnb.
+
+   Data is downloaded from remote location if it doesn't already
+   exist and can be saved if specified. If it does exist, it is
+   loaded from the local source.
+
+   :param url: URL to data on InsideAirbnb.
+   :type url: str, optional
+   :param save: Save downloaded file locally as data/airbnb.csv. By default, False.
+   :type save: bool, optional
+
+   :returns: DataFrame of Airbnb listing data.
+   :rtype: pd.DataFrame
+
+
+.. function:: wrangle_data(dataframe)
+
+   Wrangle data into a format suitable for ML.
+
+   :param dataframe: DataFrame of Airbnb listing data to wrangle.
+   :type dataframe: pd.DataFrame
+
+   :returns: A copy of dataframe wrangled into a format suitable for ML.
+   :rtype: pd.DataFrame
+
+
+.. function:: split_data(dataframe, save=False, test_fraction=0.2, random_state=123)
+
+   Split data into train and test sets.
+
+   :param dataframe: DataFrame of Airbnb listing data to wrangle.
+   :type dataframe: pd.DataFrame
+   :param test_fraction: Fraction of data to be reserved for testing, by default 0.2
+   :type test_fraction: float
+   :param random_state: Random seed, by default 123
+   :type random_state: int, optional
+   :param save: Whether to save train and test sets as csv files, by default True
+   :type save: bool, optional
+
+   :returns: * **train** (*pd.DataFrame*) -- Train data set.
+             * **test** (*pd.DataFrame*) -- Test data set.
+
+
+.. function:: train_test_table(train_df, test_df)
+
+   Print train and test data summary statistics.
+
+   :param train_df: Train data.
+   :type train_df: pd.DataFrame
+   :param test_df: Test data.
+   :type test_df: pd.DataFrame
+
+   :returns: DataFrame of train and test data summary statistics.
+   :rtype: pd.DataFrame
+
+
+.. function:: df_to_xy(train_df, test_df, normalize=True)
+
+   Split dataframes into X (features) and y (target) subsets.
+
+   :param train_df: Train data.
+   :type train_df: pd.DataFrame
+   :param test_df: Test data.
+   :type test_df: pd.DataFrame
+   :param normalize: Whether to normalize features between 0 and 1, by default True.
+   :type normalize: bool, optional
+
+   :returns: * **X_train** (*pd.DataFrame*) -- Train feature data.
+             * **y_train** (*pd.DataFrame*) -- Train target data.
+             * **X_test** (*pd.DataFrame*) -- Test feature data.
+             * **y_test** (*pd.DataFrame*) -- Test target data.
+
+
+.. function:: k_optimization(X_train, y_train, k_range=range(1, 31), cv_folds=10)
+
+   Report cross-validation results for kNN regression model.
+
+   :param X_train: Feature data of shape (n_samples, n_features).
+   :type X_train: array-like
+   :param y_train: Target values of shape (n_samples,).
+   :type y_train: array-like
+   :param k_range: Iterable of values of k to trial for model fitting, by default range(1, 30).
+   :type k_range: array-like, optional
+   :param cv_folds: Number of folds to use in cross-validation, by default 10.
+   :type cv_folds: int, optional
+
+   :returns: DataFrame of cross-validation results.
+   :rtype: pd.DataFrame
+
+
+.. function:: test_model(X_train, y_train, X_test, y_test, k=5)
+
+   Report cross-validation results for kNN regression model.
+
+   :param X_train: Train feature data of shape (n_samples, n_features).
+   :type X_train: array-like
+   :param y_train: Train target values of shape (n_samples,).
+   :type y_train: array-like
+   :param X_test: Test feature data of shape (n_samples, n_features).
+   :type X_test: array-like
+   :param y_test: Test target values of shape (n_samples,).
+   :type y_test: array-like
+   :param k: Value of k to use in sklearn.neighbors.KNeighborsRegressor.
+   :type k: integer, optional
+
+   :returns: * *float* -- Test score.
+             * *sklearn.neighbors.KNeighborsRegressor* -- Trained model.
+
+

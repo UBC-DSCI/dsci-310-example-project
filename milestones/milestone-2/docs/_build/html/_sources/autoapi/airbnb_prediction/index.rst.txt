@@ -1,0 +1,24 @@
+:mod:`airbnb_prediction`
+========================
+
+.. py:module:: airbnb_prediction
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   analysis/index.rst
+   plotting/index.rst
+
+
+Package Contents
+----------------
+
+.. data:: __version__
+   :annotation: = 0.1.0
+
+   
+
