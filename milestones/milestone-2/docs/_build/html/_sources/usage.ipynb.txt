@@ -61,7 +61,7 @@
   },
   {
    "source": [
-    "The data set is hosted on [InsideAirbnb](http://insideairbnb.com/). We'll download the data using the `analysis.load_data()` function, which downloads data for all the active Airbnb listings for Vancouver, Canada in April 2021:"
+    "The data set is hosted on [InsideAirbnb](http://insideairbnb.com/). We'll download the data using the `analysis.load_data()` function, which by default downloads data for all the active Airbnb listings for Vancouver, Canada in April 2021 (an alternative URL can also be provided if desired):"
    ],
    "cell_type": "markdown",
    "metadata": {}
@@ -228,13 +228,9 @@
   },
   {
    "source": [
-    "`airbnb_prediction` uses k-nearest neighbors regression to predict Airbnb nightly prices from our features. A key hyperparameter for this model is `k`. To find the best value of the hyperparameter `k` (number of nearest neighbours), we can split out data set into X (features) and y (target) subsets and then use the `analysis.k_optimization()` function to evaluate different values of `k` using cross-validation.\n",
+    "`airbnb_prediction` uses k-nearest neighbors regression to predict Airbnb nightly prices from our features. A key hyperparameter for this model is `k`. To find the best value of the hyperparameter `k` (number of nearest neighbors), we can split our data set into X (features) and y (target) subsets using the `analysis.df_to_xy()` function, and then use the `analysis.k_optimization()` function to evaluate different values of `k` using cross-validation and mean absolute error.\n",
     "\n",
-    "\n",
-    "\n",
-    "will perform 10-fold cross validation using root-mean-squared-error as our metric of model prediction performance.\n",
-    "\n",
-    "Note that our input features are on different scales, e.g., latitude is in degrees and number of bedrooms is an integer. To allow our k-nearest neighbors model to equally weight features, we should scale the data before training. We'll use the `sklearn` function `MinMaxScaler()` to normalize our features to be between 0 and 1."
+    "It's important to note that our input features are on different scales, e.g., latitude is in degrees and number of bedrooms is an integer. To allow our k-nearest neighbors model to equally weight features, we should scale the data before training, which can be achieved using the `normalize=True` argument of the `analysis.df_to_xy()` function."
    ],
    "cell_type": "markdown",
    "metadata": {}
@@ -316,6 +312,13 @@
    "source": [
     "air.plotting.cv_results(cv_results_df)"
    ]
+  },
+  {
+   "source": [
+    "The results above indicate that model performance is relatively stable at values of `k` > 10. In the interest of parsimony, we'll build a final model using `k=10` in the next section."
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
   },
   {
    "source": [

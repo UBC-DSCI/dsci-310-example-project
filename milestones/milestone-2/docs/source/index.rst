@@ -1,7 +1,7 @@
 Welcome to Airbnb Prediction's documentation!
 ===========================================================
 
-A package for r predicting Airbnb property prices in Vancouver.
+A package for predicting Airbnb property prices in Vancouver.
 
 To get started, check out the sections below:
 

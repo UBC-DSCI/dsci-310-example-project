@@ -1,0 +1,658 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predicting Airbnb nightly price from property and host data &#8212; Airbnb Prediction</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Airbnb Prediction</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 current">
+  <a class="reference internal" href="#">
+   Predicting Airbnb nightly price from property and host data
+  </a>
+ </li>
+</ul>
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/report.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Freport.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/report.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methods">
+   Methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#splitting-data-into-training-and-testing-sets">
+     Splitting data into training and testing sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analysis">
+     Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#results-and-discussion">
+   Results and Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="predicting-airbnb-nightly-price-from-property-and-host-data">
+<h1>Predicting Airbnb nightly price from property and host data<a class="headerlink" href="#predicting-airbnb-nightly-price-from-property-and-host-data" title="Permalink to this headline">¶</a></h1>
+<p><strong>Tomas Beuzen, May 2021</strong></p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Here we attempt to build a regression model, using the k-nearest neighbors algorithm, which uses characteristics of an Airbnb property and host (price, bedrooms, host response rate, etc.) to predict the daily price of the property.</p>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>As of June, 2021, Airbnb rentals in Vancouver average $160 a night and provide just over $1600 in average monthly revenue to hosts <span id="id1">[<a class="reference internal" href="#id10">AirDNA, 2021</a>]</span>. However, occupancy rates vary significantly amongst currently listed properties with some properties boasting 100% occupancy rates, while others are at 0% some months <span id="id2">[<a class="reference internal" href="#id10">AirDNA, 2021</a>]</span>. Competitively pricing a property is a key factor influencing occupancy rates, and hence revenue <span id="id3">[<a class="reference internal" href="#id11">Airbnb, 2021</a>]</span>.</p>
+<p>Here we investigate whether a machine learning algorithm can be used to predict the nightly price of an Airbnb property based on characteristics of the property and the host. Such a model could help prospective and existing hosts determine how to competitively and accurately price their new or existing property, relative to historical data, with minimal time and effort.</p>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data">
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>The data used to build the model contains all the active Airbnb listings for Vancouver, Canada. The data set comes from <a class="reference external" href="http://insideairbnb.com/">Inside Airbnb</a> and is updated monthly - this project used the most recent version as of writing, from April 2021.</p>
+<p>The data set comprises 10 features:</p>
+<ul class="simple">
+<li><p>The host response rate (<code class="docutils literal notranslate"><span class="pre">host_response_rate</span></code>);</p></li>
+<li><p>The host acceptance rate (<code class="docutils literal notranslate"><span class="pre">host_acceptance_rate</span></code>);</p></li>
+<li><p>The property location (<code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>);</p></li>
+<li><p>Number of bedrooms, number of beds, and number of guests the property accommodates (<code class="docutils literal notranslate"><span class="pre">bedrooms</span></code>, <code class="docutils literal notranslate"><span class="pre">beds</span></code> and <code class="docutils literal notranslate"><span class="pre">accommodates</span></code>);</p></li>
+<li><p>The minimum number of nights a guests must stay (<code class="docutils literal notranslate"><span class="pre">minimum_nights</span></code>); and,</p></li>
+<li><p>The review score of the property and number of reviews (<code class="docutils literal notranslate"><span class="pre">review_scores_rating</span></code>, and <code class="docutils literal notranslate"><span class="pre">number_of_reviews</span></code>).</p></li>
+</ul>
+<p>The target variable to predict is the property’s daily price (<code class="docutils literal notranslate"><span class="pre">price</span></code>). This is a number greater than 0.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/processed/airbnb_wrangled.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>host_response_rate</th>
+      <th>host_acceptance_rate</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>accommodates</th>
+      <th>bedrooms</th>
+      <th>beds</th>
+      <th>price</th>
+      <th>minimum_nights</th>
+      <th>number_of_reviews</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>93</td>
+      <td>87</td>
+      <td>49.28872</td>
+      <td>-123.12046</td>
+      <td>5</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>150.0</td>
+      <td>90</td>
+      <td>16</td>
+      <td>93.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100</td>
+      <td>57</td>
+      <td>49.28201</td>
+      <td>-123.12669</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>85.0</td>
+      <td>30</td>
+      <td>430</td>
+      <td>93.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100</td>
+      <td>78</td>
+      <td>49.25622</td>
+      <td>-123.06607</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>145.0</td>
+      <td>30</td>
+      <td>88</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100</td>
+      <td>0</td>
+      <td>49.26557</td>
+      <td>-123.09600</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>51.0</td>
+      <td>30</td>
+      <td>118</td>
+      <td>91.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100</td>
+      <td>100</td>
+      <td>49.27569</td>
+      <td>-123.07057</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>79.0</td>
+      <td>1</td>
+      <td>390</td>
+      <td>100.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="splitting-data-into-training-and-testing-sets">
+<h3>Splitting data into training and testing sets<a class="headerlink" href="#splitting-data-into-training-and-testing-sets" title="Permalink to this headline">¶</a></h3>
+<p>The data was split into an 80% train set and 20% test set:</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;results/train_test_table.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fraction</th>
+      <th>Median price</th>
+      <th>Mean price</th>
+      <th>Std price</th>
+    </tr>
+    <tr>
+      <th>Partition</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Train</th>
+      <td>0.8</td>
+      <td>113.0</td>
+      <td>132.7</td>
+      <td>80.7</td>
+    </tr>
+    <tr>
+      <th>Test</th>
+      <td>0.2</td>
+      <td>112.5</td>
+      <td>133.5</td>
+      <td>79.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h3>
+<p>The k-nearest neighbors algorithm (kNN) was used to build a regression model to predict the daily price of a property based on the 10 input features. As kNN is a distance-based algorithm, it was important to scale each feature to a uniform scale. As a result, each feature was normalized to be between 0 and 1 before any model fitting.</p>
+<p>The hyperparameter <code class="docutils literal notranslate"><span class="pre">k</span></code> (number of nearest neighbors) was chosen using 10-fold cross validation with mean-absolute-error as the scoring metric. The Python programming language <span id="id4">[<a class="reference internal" href="#id12">Van Rossum and Drake Jr, 1995</a>]</span> and the following Python packages were used to perform the analysis: pandas <span id="id5">[]</span>, scikit-learn <span id="id6">[<a class="reference internal" href="#id14">Pedregosa <em>et al.</em>, 2011</a>]</span>, altair <span id="id7">[<a class="reference internal" href="#id15">VanderPlas <em>et al.</em>, 2018</a>]</span>, seaborn <span id="id8">[<a class="reference internal" href="#id16">Waskom, 2021</a>]</span>.</p>
+</div>
+</div>
+<div class="section" id="results-and-discussion">
+<h2>Results and Discussion<a class="headerlink" href="#results-and-discussion" title="Permalink to this headline">¶</a></h2>
+<p>To look at which features might be useful to predict the price of an Airbnb property, a regression plot of each feature against the response was made (using the training data set only). From these plots, it can be seen that the features <code class="docutils literal notranslate"><span class="pre">host_response_rate</span></code> and <code class="docutils literal notranslate"><span class="pre">host_acceptance_rate</span></code> don’t seem to be strongly correlated with the target, price based on the above regression plots. As a result, these were dropped from further analysis.</p>
+<div class="figure align-default" id="regression-plots">
+<a class="reference internal image-reference" href="_images/regression_plots.png"><img alt="_images/regression_plots.png" src="_images/regression_plots.png" style="height: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Regression plots of each feature against the target, price, from the training data.</span><a class="headerlink" href="#regression-plots" title="Permalink to this image">¶</a></p>
+</div>
+<p>Values of <code class="docutils literal notranslate"><span class="pre">k</span></code> from 1 to 30 were trialled via 10-fold cross-validation to determine which value of <code class="docutils literal notranslate"><span class="pre">k</span></code> was optimal for the data. Results are shown in the figure below:</p>
+<div class="figure align-default" id="optimization-plot">
+<a class="reference internal image-reference" href="_images/k_optimization_plot.png"><img alt="_images/k_optimization_plot.png" src="_images/k_optimization_plot.png" style="height: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Results from 10-fold cross validation to choose <code class="docutils literal notranslate"><span class="pre">k</span></code>. Mean absolute error was used as the regression scoring metric.</span><a class="headerlink" href="#optimization-plot" title="Permalink to this image">¶</a></p>
+</div>
+<p>Results how that at values higher than <code class="docutils literal notranslate"><span class="pre">k=10</span></code> there is little change in model predictive performance in terms of mean absolute error. In the interest of parsimony (choosing a simpler model over a more complex model), a value of <code class="docutils literal notranslate"><span class="pre">k=10</span></code> was selected to train the final model:</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;results/test_performance.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mae</th>
+    </tr>
+    <tr>
+      <th>k</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>$40.98</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We see that the test performance is similar to the cross-validation performance from earlier. Our result indicates that our model has an mean absolute error of about $41 per night which is not too bad relative to the mean and standard deviation of our training data:</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/processed/airbnb_train.csv&quot;</span><span class="p">)[[</span><span class="s2">&quot;price&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1662.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>132.717208</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>80.653163</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>20.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>79.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>113.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>160.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>499.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>At this point, our model can provide Airbnb hosts with an estimate of how they should price their property, but it could be improved by collecting more data, or doing more intensive feature exploration and engineering.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id9"><dl class="citation">
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id3">Air21a</a></span></dt>
+<dd><p>Airbnb. Setting a pricing strategy. 2021. URL: <a class="reference external" href="https://www.airbnb.com.au/resources/hosting-homes/a/setting-a-pricing-strategy-15?_set_bev_on_new_domain=1625022749_NmJiZGFhZjZiNWRh">https://www.airbnb.com.au/resources/hosting-homes/a/setting-a-pricing-strategy-15?_set_bev_on_new_domain=1625022749_NmJiZGFhZjZiNWRh</a> (visited on 2021-06-30).</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">Air21b</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>AirDNA. Marketminder: british columbia, vancouver. 2021. URL: <a class="reference external" href="https://www.airdna.co/vacation-rental-data/app/ca/british-columbia/vancouver/overview">https://www.airdna.co/vacation-rental-data/app/ca/british-columbia/vancouver/overview</a> (visited on 2021-06-30).</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">PVG+11</a></span></dt>
+<dd><p>F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. Scikit-learn: machine learning in Python. <em>Journal of Machine Learning Research</em>, 12:2825–2830, 2011.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id4">VRDJ95</a></span></dt>
+<dd><p>Guido Van Rossum and Fred L Drake Jr. <em>Python reference manual</em>. Centrum voor Wiskunde en Informatica Amsterdam, 1995.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id7">VGH+18</a></span></dt>
+<dd><p>Jacob VanderPlas, Brian Granger, Jeffrey Heer, Dominik Moritz, Kanit Wongsuphasawat, Arvind Satyanarayan, Eitan Lees, Ilia Timofeev, Ben Welsh, and Scott Sievert. Altair: interactive statistical visualizations for python. <em>Journal of Open Source Software</em>, 3(32):1057, 2018. URL: <a class="reference external" href="https://doi.org/10.21105/joss.01057">https://doi.org/10.21105/joss.01057</a>, <a class="reference external" href="https://doi.org/10.21105/joss.01057">doi:10.21105/joss.01057</a>.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id8">Was21</a></span></dt>
+<dd><p>Michael L. Waskom. Seaborn: statistical data visualization. <em>Journal of Open Source Software</em>, 6(60):3021, 2021. URL: <a class="reference external" href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>, <a class="reference external" href="https://doi.org/10.21105/joss.03021">doi:10.21105/joss.03021</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tomas Beuzen<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

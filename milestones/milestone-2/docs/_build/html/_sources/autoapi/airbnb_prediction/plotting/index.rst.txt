@@ -18,23 +18,31 @@ Functions
 
 
 
-.. function:: reg_subplots(dataframe)
+.. function:: reg_subplots(dataframe, save=False, save_location='results/regression_plots.png')
 
    Plot regression plots of features vs target.
 
    :param dataframe: Airbnb data to plot.
    :type dataframe: pd.DataFrame
+   :param save: Whether to save figure to file, by default False
+   :type save: bool, optional
+   :param save_location: The save location of file.
+   :type save_location: str, optional
 
    :returns: Regression subplots.
    :rtype: seaborn.axisgrid.FacetGrid
 
 
-.. function:: cv_results(dataframe)
+.. function:: cv_results(dataframe, save=False, save_location='results/k_optimization_plot.png')
 
    Plot line chart of cross-validation results.
 
    :param dataframe: DataFrame of cross-validation results to plot.
    :type dataframe: pd.DataFrame
+   :param save: Whether to save figure to file, by default False
+   :type save: bool, optional
+   :param save_location: The save location of file.
+   :type save_location: str, optional
 
    :returns: Line chart of cross-validation results.
    :rtype: alt.Chart

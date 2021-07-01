@@ -11,15 +11,6 @@ repository = "https://github.com/TomasBeuzen/airbnb_prediction"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pandas = "^1.2.4"
-
-[tool.poetry.dev-dependencies]
-Sphinx = "^4.0.2"
-nbsphinx = "^0.8.6"
-ipykernel = "^5.5.5"
-sphinx-autoapi = "^1.8.1"
-sphinx-rtd-theme = "^0.5.2"
-pytest = "^6.2.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

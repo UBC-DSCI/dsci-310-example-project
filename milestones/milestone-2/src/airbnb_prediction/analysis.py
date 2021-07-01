@@ -9,6 +9,8 @@ from sklearn.metrics import mean_absolute_error
 def load_data(
     url="http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz",
     save=False,
+    save_location="data/raw/airbnb.csv",
+    verbose=True
 ):
     """Load data from InsideAirbnb.
 
@@ -22,17 +24,23 @@ def load_data(
         URL to data on InsideAirbnb.
     save : bool, optional
         Save downloaded file locally as data/airbnb.csv. By default, False.
+    save_location : str, optional
+        The download/save location of file.
+    verbose : bool, optional
+        Print progress information. By default, True.
 
     Returns
     -------
     pd.DataFrame
         DataFrame of Airbnb listing data.
     """
-    if os.path.isfile("data/airbnb.csv"):
-        print("Data already downloaded, loading from local source...")
-        data = pd.read_csv("data/airbnb.csv")
+    if os.path.isfile(save_location):
+        if verbose:
+            print("Data already downloaded, loading from local source...")
+        data = pd.read_csv(save_location)
     else:
-        print("Downloading data from online source...")
+        if verbose:
+            print("Downloading data from online source...")
         cols = [
             "host_response_rate",
             "host_acceptance_rate",
@@ -48,46 +56,69 @@ def load_data(
         ]
         data = pd.read_csv(url, usecols=cols, compression="gzip")
         if save:
-            data.to_csv("data/airbnb.csv", index=False)
+            if verbose:
+                print(f"Saving to {save_location}...")
+            data.to_csv(save_location, index=False)
     return data
 
 
-def wrangle_data(dataframe):
+def wrangle_data(dataframe, save=False, save_location="data/processed/airbnb_wrangled.csv"):
     """Wrangle data into a format suitable for ML.
 
     Parameters
     ----------
     dataframe : pd.DataFrame
         DataFrame of Airbnb listing data to wrangle.
+    save : bool, optional
+        Save wrangled data locally, by default, False.
+    save_location : str, optional
+        The download/save location of file.
 
     Returns
     -------
     pd.DataFrame
         A copy of dataframe wrangled into a format suitable for ML.
     """
-    data_wrangled = (
-        dataframe.query("number_of_reviews >= 1").dropna().reset_index(drop=True).copy()
-    )
-    data_wrangled.loc[:, "host_response_rate"] = (
-        data_wrangled.loc[:, "host_response_rate"]
-        .replace({"\%": ""}, regex=True)
-        .astype(int)
-    )
-    data_wrangled.loc[:, "host_acceptance_rate"] = (
-        data_wrangled.loc[:, "host_acceptance_rate"]
-        .replace({"\%": ""}, regex=True)
-        .astype(int)
-    )
-    data_wrangled.loc[:, "price"] = (
-        data_wrangled.loc[:, "price"].replace({"[\$,]": ""}, regex=True).astype(float)
-    )
-    data_wrangled = data_wrangled.query("price < 500").rename(
-        columns={"review_scores_rating": "rating"}
-    )
+    if os.path.isfile(save_location) and not save:
+        print("Data already downloaded, loading from local source...")
+        data_wrangled = pd.read_csv(save_location)
+    else:
+        data_wrangled = (
+            dataframe.query("number_of_reviews >= 1")
+            .dropna()
+            .reset_index(drop=True)
+            .copy()
+        )
+        data_wrangled.loc[:, "host_response_rate"] = (
+            data_wrangled.loc[:, "host_response_rate"]
+            .replace({"%": ""}, regex=True)
+            .astype(int)
+        )
+        data_wrangled.loc[:, "host_acceptance_rate"] = (
+            data_wrangled.loc[:, "host_acceptance_rate"]
+            .replace({"%": ""}, regex=True)
+            .astype(int)
+        )
+        data_wrangled.loc[:, "price"] = (
+            data_wrangled.loc[:, "price"]
+            .replace({"[$,]": ""}, regex=True)
+            .astype(float)
+        )
+        data_wrangled = data_wrangled.query("price < 500").rename(
+            columns={"review_scores_rating": "rating"}
+        )
+        if save:
+            data_wrangled.to_csv(save_location, index=False)
     return data_wrangled
 
 
-def split_data(dataframe, save=False, test_fraction=0.2, random_state=123):
+def split_data(
+    dataframe,
+    test_fraction=0.2,
+    random_state=123,
+    save=False,
+    save_location="data/processed/airbnb",
+):
     """Split data into train and test sets.
 
     Parameters
@@ -99,7 +130,9 @@ def split_data(dataframe, save=False, test_fraction=0.2, random_state=123):
     random_state : int, optional
         Random seed, by default 123
     save : bool, optional
-        Whether to save train and test sets as csv files, by default True
+        Whether to save train and test sets as csv files, by default False
+    save_location : str, optional
+        The download/save directory of train/test splits.
 
     Returns
     -------
@@ -108,16 +141,26 @@ def split_data(dataframe, save=False, test_fraction=0.2, random_state=123):
     test : pd.DataFrame
         Test data set.
     """
-    train, test = train_test_split(
-        dataframe, test_size=test_fraction, random_state=random_state
-    )
-    if save:
-        train.to_csv("data/airbnb_train.csv", index=False)
-        test.to_csv("data/airbnb_test.csv", index=False)
+    if os.path.isfile(save_location + "_train.csv") and os.path.isfile(
+        save_location + "test.csv"
+    ) and not save:
+        print("Data already split, reading from local source...")
+        train, test = pd.read_csv(save_location + "_train.csv"), pd.read_csv(
+            save_location + "_test.csv"
+        )
+    else:
+        train, test = train_test_split(
+            dataframe, test_size=test_fraction, random_state=random_state
+        )
+        if save:
+            train.to_csv(save_location + "_train.csv", index=False)
+            test.to_csv(save_location + "_test.csv", index=False)
     return train, test
 
 
-def train_test_table(train_df, test_df):
+def train_test_table(
+    train_df, test_df, save=False, save_location="results/train_test_table.csv"
+):
     """Print train and test data summary statistics.
 
     Parameters
@@ -126,6 +169,10 @@ def train_test_table(train_df, test_df):
         Train data.
     test_df : pd.DataFrame
         Test data.
+    save : bool, optional
+        Whether to table as csv file, by default False
+    save_location : str, optional
+        The save location of file.
 
     Returns
     -------
@@ -142,6 +189,8 @@ def train_test_table(train_df, test_df):
             "Std price": [train_df["price"].std(), test_df["price"].std()],
         }
     ).round(1)
+    if save:
+        table.to_csv(save_location, index=False)
     return table
 
 
@@ -182,7 +231,14 @@ def df_to_xy(train_df, test_df, normalize=True):
     return X_train, y_train, X_test, y_test
 
 
-def k_optimization(X_train, y_train, k_range=range(1, 31), cv_folds=10):
+def k_optimization(
+    X_train,
+    y_train,
+    k_range=range(1, 31),
+    cv_folds=10,
+    save=False,
+    save_location="results/k_optimization.csv",
+):
     """Report cross-validation results for kNN regression model.
 
     Parameters
@@ -195,6 +251,10 @@ def k_optimization(X_train, y_train, k_range=range(1, 31), cv_folds=10):
         Iterable of values of k to trial for model fitting, by default range(1, 30).
     cv_folds : int, optional
         Number of folds to use in cross-validation, by default 10.
+    save : bool, optional
+        Whether to save table as csv file, by default False
+    save_location : str, optional
+        The save location of file.
 
     Returns
     -------
@@ -211,10 +271,13 @@ def k_optimization(X_train, y_train, k_range=range(1, 31), cv_folds=10):
             scoring="neg_mean_absolute_error",
         )
         cv_results.append((k, cv.mean(), cv.min(), cv.max()))
-    return pd.DataFrame(cv_results, columns=["k", "Mean", "Min", "Max"])
+    cv_results_df = pd.DataFrame(cv_results, columns=["k", "Mean", "Min", "Max"])
+    if save:
+        cv_results_df.to_csv(save_location, index=False)
+    return cv_results_df
 
 
-def test_model(X_train, y_train, X_test, y_test, k=5):
+def test_model(X_train, y_train, X_test, y_test, k=5, save=False, save_location="results/test_performance.csv"):
     """Report cross-validation results for kNN regression model.
 
     Parameters
@@ -229,6 +292,10 @@ def test_model(X_train, y_train, X_test, y_test, k=5):
         Test target values of shape (n_samples,).
     k : integer, optional
         Value of k to use in sklearn.neighbors.KNeighborsRegressor.
+    save : bool, optional
+        Whether to save result as csv file, by default False
+    save_location : str, optional
+        The save location of file.
 
     Returns
     -------
@@ -237,5 +304,8 @@ def test_model(X_train, y_train, X_test, y_test, k=5):
     sklearn.neighbors.KNeighborsRegressor
         Trained model.
     """
-    model = KNeighborsRegressor(n_neighbors=10).fit(X_train, y_train)
-    return mean_absolute_error(y_test, model.predict(X_test)), model
+    model = KNeighborsRegressor(n_neighbors=k).fit(X_train, y_train)
+    mae = mean_absolute_error(y_test, model.predict(X_test))
+    if save:
+        pd.DataFrame(dict(k=[k], mae=[f"${mae:.2f}"]), index=["Test data"]).to_csv(save_location, index=False)
+    return mae, model

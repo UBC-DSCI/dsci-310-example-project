@@ -1,4 +1,4 @@
-# docker build -t airbnb-report .
+# docker build -t airbnb-analysis .
 
 # use jupyter/scipy-notebook as the base image
 FROM jupyter/scipy-notebook

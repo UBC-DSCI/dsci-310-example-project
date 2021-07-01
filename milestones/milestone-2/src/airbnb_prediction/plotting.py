@@ -2,13 +2,21 @@ import seaborn as sns
 import altair as alt
 
 
-def reg_subplots(dataframe):
+def reg_subplots(
+    dataframe,
+    save=False,
+    save_location="results/regression_plots.png",
+):
     """Plot regression plots of features vs target.
 
     Parameters
     ----------
     dataframe : pd.DataFrame
         Airbnb data to plot.
+    save : bool, optional
+        Whether to save figure to file, by default False
+    save_location : str, optional
+        The save location of file.
 
     Returns
     -------
@@ -34,16 +42,23 @@ def reg_subplots(dataframe):
         line_kws={"color": "red"},
     )
     fig.set_titles("{col_name}")
+    if save:
+        fig.savefig(save_location)
     return fig
 
 
-def cv_results(dataframe):
+def cv_results(dataframe, save=False, save_location="results/k_optimization_plot.png"):
     """Plot line chart of cross-validation results.
 
     Parameters
     ----------
     dataframe : pd.DataFrame
         DataFrame of cross-validation results to plot.
+    save : bool, optional
+        Whether to save figure to file, by default False
+    save_location : str, optional
+        The save location of file.
+
 
     Returns
     -------
@@ -66,4 +81,6 @@ def cv_results(dataframe):
     )
 
     chart = (scatter + errorbars).configure_axis(labelFontSize=14, titleFontSize=14)
+    if save:
+        chart.save(save_location)
     return chart

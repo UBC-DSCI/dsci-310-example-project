@@ -23,7 +23,7 @@ Functions
 
 
 
-.. function:: load_data(url='http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz', save=False)
+.. function:: load_data(url='http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz', save=False, save_location='data/raw/airbnb.csv', verbose=True)
 
    Load data from InsideAirbnb.
 
@@ -35,23 +35,31 @@ Functions
    :type url: str, optional
    :param save: Save downloaded file locally as data/airbnb.csv. By default, False.
    :type save: bool, optional
+   :param save_location: The download/save location of file.
+   :type save_location: str, optional
+   :param verbose: Print progress information. By default, True.
+   :type verbose: bool, optional
 
    :returns: DataFrame of Airbnb listing data.
    :rtype: pd.DataFrame
 
 
-.. function:: wrangle_data(dataframe)
+.. function:: wrangle_data(dataframe, save=False, save_location='data/processed/airbnb_wrangled.csv')
 
    Wrangle data into a format suitable for ML.
 
    :param dataframe: DataFrame of Airbnb listing data to wrangle.
    :type dataframe: pd.DataFrame
+   :param save: Save wrangled data locally, by default, False.
+   :type save: bool, optional
+   :param save_location: The download/save location of file.
+   :type save_location: str, optional
 
    :returns: A copy of dataframe wrangled into a format suitable for ML.
    :rtype: pd.DataFrame
 
 
-.. function:: split_data(dataframe, save=False, test_fraction=0.2, random_state=123)
+.. function:: split_data(dataframe, test_fraction=0.2, random_state=123, save=False, save_location='data/processed/airbnb')
 
    Split data into train and test sets.
 
@@ -61,14 +69,16 @@ Functions
    :type test_fraction: float
    :param random_state: Random seed, by default 123
    :type random_state: int, optional
-   :param save: Whether to save train and test sets as csv files, by default True
+   :param save: Whether to save train and test sets as csv files, by default False
    :type save: bool, optional
+   :param save_location: The download/save directory of train/test splits.
+   :type save_location: str, optional
 
    :returns: * **train** (*pd.DataFrame*) -- Train data set.
              * **test** (*pd.DataFrame*) -- Test data set.
 
 
-.. function:: train_test_table(train_df, test_df)
+.. function:: train_test_table(train_df, test_df, save=False, save_location='results/train_test_table.csv')
 
    Print train and test data summary statistics.
 
@@ -76,6 +86,10 @@ Functions
    :type train_df: pd.DataFrame
    :param test_df: Test data.
    :type test_df: pd.DataFrame
+   :param save: Whether to table as csv file, by default False
+   :type save: bool, optional
+   :param save_location: The save location of file.
+   :type save_location: str, optional
 
    :returns: DataFrame of train and test data summary statistics.
    :rtype: pd.DataFrame
@@ -98,7 +112,7 @@ Functions
              * **y_test** (*pd.DataFrame*) -- Test target data.
 
 
-.. function:: k_optimization(X_train, y_train, k_range=range(1, 31), cv_folds=10)
+.. function:: k_optimization(X_train, y_train, k_range=range(1, 31), cv_folds=10, save=False, save_location='results/k_optimization.csv')
 
    Report cross-validation results for kNN regression model.
 
@@ -110,6 +124,10 @@ Functions
    :type k_range: array-like, optional
    :param cv_folds: Number of folds to use in cross-validation, by default 10.
    :type cv_folds: int, optional
+   :param save: Whether to save table as csv file, by default False
+   :type save: bool, optional
+   :param save_location: The save location of file.
+   :type save_location: str, optional
 
    :returns: DataFrame of cross-validation results.
    :rtype: pd.DataFrame

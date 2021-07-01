@@ -197,22 +197,22 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.load_data" title="airbnb_prediction.analysis.load_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_data</span></code></a>(url='http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz', save=False)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.load_data" title="airbnb_prediction.analysis.load_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_data</span></code></a>(url='http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz', save=False, save_location='data/raw/airbnb.csv', verbose=True)</p></td>
 <td><p>Load data from InsideAirbnb.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.wrangle_data" title="airbnb_prediction.analysis.wrangle_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrangle_data</span></code></a>(dataframe)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.wrangle_data" title="airbnb_prediction.analysis.wrangle_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrangle_data</span></code></a>(dataframe, save=False, save_location='data/processed/airbnb_wrangled.csv')</p></td>
 <td><p>Wrangle data into a format suitable for ML.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.split_data" title="airbnb_prediction.analysis.split_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_data</span></code></a>(dataframe, save=False, test_fraction=0.2, random_state=123)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.split_data" title="airbnb_prediction.analysis.split_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_data</span></code></a>(dataframe, test_fraction=0.2, random_state=123, save=False, save_location='data/processed/airbnb')</p></td>
 <td><p>Split data into train and test sets.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.train_test_table" title="airbnb_prediction.analysis.train_test_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_test_table</span></code></a>(train_df, test_df)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.train_test_table" title="airbnb_prediction.analysis.train_test_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_test_table</span></code></a>(train_df, test_df, save=False, save_location='results/train_test_table.csv')</p></td>
 <td><p>Print train and test data summary statistics.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.df_to_xy" title="airbnb_prediction.analysis.df_to_xy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">df_to_xy</span></code></a>(train_df, test_df, normalize=True)</p></td>
 <td><p>Split dataframes into X (features) and y (target) subsets.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.k_optimization" title="airbnb_prediction.analysis.k_optimization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_optimization</span></code></a>(X_train, y_train, k_range=range(1, 31), cv_folds=10)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.k_optimization" title="airbnb_prediction.analysis.k_optimization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_optimization</span></code></a>(X_train, y_train, k_range=range(1, 31), cv_folds=10, save=False, save_location='results/k_optimization.csv')</p></td>
 <td><p>Report cross-validation results for kNN regression model.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#airbnb_prediction.analysis.test_model" title="airbnb_prediction.analysis.test_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_model</span></code></a>(X_train, y_train, X_test, y_test, k=5)</p></td>
@@ -222,7 +222,7 @@
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="airbnb_prediction.analysis.load_data">
-<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.load_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'http://data.insideairbnb.com/canada/bc/vancouver/2021-04-12/data/listings.csv.gz'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data/raw/airbnb.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.load_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load data from InsideAirbnb.</p>
 <p>Data is downloaded from remote location if it doesn’t already
 exist and can be saved if specified. If it does exist, it is
@@ -232,6 +232,8 @@ loaded from the local source.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL to data on InsideAirbnb.</p></li>
 <li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Save downloaded file locally as data/airbnb.csv. By default, False.</p></li>
+<li><p><strong>save_location</strong> (<em>str</em><em>, </em><em>optional</em>) – The download/save location of file.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Print progress information. By default, True.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -245,11 +247,15 @@ loaded from the local source.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="airbnb_prediction.analysis.wrangle_data">
-<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">wrangle_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#wrangle_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.wrangle_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">wrangle_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data/processed/airbnb_wrangled.csv'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#wrangle_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.wrangle_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrangle data into a format suitable for ML.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – DataFrame of Airbnb listing data to wrangle.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – DataFrame of Airbnb listing data to wrangle.</p></li>
+<li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Save wrangled data locally, by default, False.</p></li>
+<li><p><strong>save_location</strong> (<em>str</em><em>, </em><em>optional</em>) – The download/save location of file.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A copy of dataframe wrangled into a format suitable for ML.</p>
@@ -262,7 +268,7 @@ loaded from the local source.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="airbnb_prediction.analysis.split_data">
-<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">123</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.split_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">split_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">123</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data/processed/airbnb'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#split_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.split_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split data into train and test sets.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -270,7 +276,8 @@ loaded from the local source.</p>
 <li><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – DataFrame of Airbnb listing data to wrangle.</p></li>
 <li><p><strong>test_fraction</strong> (<em>float</em>) – Fraction of data to be reserved for testing, by default 0.2</p></li>
 <li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed, by default 123</p></li>
-<li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save train and test sets as csv files, by default True</p></li>
+<li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save train and test sets as csv files, by default False</p></li>
+<li><p><strong>save_location</strong> (<em>str</em><em>, </em><em>optional</em>) – The download/save directory of train/test splits.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -285,13 +292,15 @@ loaded from the local source.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="airbnb_prediction.analysis.train_test_table">
-<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">train_test_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#train_test_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.train_test_table" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">train_test_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'results/train_test_table.csv'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#train_test_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.train_test_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print train and test data summary statistics.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>train_df</strong> (<em>pd.DataFrame</em>) – Train data.</p></li>
 <li><p><strong>test_df</strong> (<em>pd.DataFrame</em>) – Test data.</p></li>
+<li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to table as csv file, by default False</p></li>
+<li><p><strong>save_location</strong> (<em>str</em><em>, </em><em>optional</em>) – The save location of file.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -329,7 +338,7 @@ loaded from the local source.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="airbnb_prediction.analysis.k_optimization">
-<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">k_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">range(1,</span> <span class="pre">31)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_folds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#k_optimization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.k_optimization" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">airbnb_prediction.analysis.</span></span><span class="sig-name descname"><span class="pre">k_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">range(1,</span> <span class="pre">31)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_folds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'results/k_optimization.csv'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/airbnb_prediction/analysis.html#k_optimization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#airbnb_prediction.analysis.k_optimization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Report cross-validation results for kNN regression model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -338,6 +347,8 @@ loaded from the local source.</p>
 <li><p><strong>y_train</strong> (<em>array-like</em>) – Target values of shape (n_samples,).</p></li>
 <li><p><strong>k_range</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Iterable of values of k to trial for model fitting, by default range(1, 30).</p></li>
 <li><p><strong>cv_folds</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of folds to use in cross-validation, by default 10.</p></li>
+<li><p><strong>save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save table as csv file, by default False</p></li>
+<li><p><strong>save_location</strong> (<em>str</em><em>, </em><em>optional</em>) – The save location of file.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
