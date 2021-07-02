@@ -14,20 +14,18 @@ Follow the steps below to reproduce the analysis.
 1. Build Docker image:
 
     ```sh
-    docker build -t airbnb-analysis .
+    docker build -t airbnb-analysis-final .
     ```
 
 2. Run a new container from this directory using the following command:
 
     ```sh
-    docker run -it -p 8888:8888 -v "${PWD}":/home/jovyan/${PWD##*/} --rm airbnb-analysis
+    docker run -it -p 8888:8888 -v "${PWD}":/home/jovyan/${PWD##*/} --rm airbnb-analysis-final
     ```
 
-3. (Optional) In the initialized Jupyter environment, open a new terminal and run tests using `pytest`:
+3. In the initialized Jupyter environment, open a new terminal and run the Prefect pipeline:
 
     ```sh
-    cd milestone-1
-    pytest tests/
+    cd final-project/
+    python pipeline.py
     ```
-
-4. If tests pass successfuly, find and open the `report.ipynb` file and run all cells.

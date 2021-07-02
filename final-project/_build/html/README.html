@@ -205,22 +205,21 @@
 <p>Follow the steps below to reproduce the analysis.</p>
 <ol>
 <li><p>Build Docker image:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker build -t airbnb-analysis .
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker build -t airbnb-analysis-final .
 </pre></div>
 </div>
 </li>
 <li><p>Run a new container from this directory using the following command:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker run -it -p <span class="m">8888</span>:8888 -v <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">&quot;</span>:/home/jovyan/<span class="si">${</span><span class="nv">PWD</span><span class="p">##*/</span><span class="si">}</span> --rm airbnb-analysis
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker run -it -p <span class="m">8888</span>:8888 -v <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">&quot;</span>:/home/jovyan/<span class="si">${</span><span class="nv">PWD</span><span class="p">##*/</span><span class="si">}</span> --rm airbnb-analysis-final
 </pre></div>
 </div>
 </li>
-<li><p>(Optional) In the initialized Jupyter environment, open a new terminal and run tests using <code class="docutils literal notranslate"><span class="pre">pytest</span></code>:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> milestone-1
-pytest tests/
+<li><p>In the initialized Jupyter environment, open a new terminal and run the Prefect pipeline:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> final-project/
+python pipeline.py
 </pre></div>
 </div>
 </li>
-<li><p>If tests pass successfuly, find and open the <code class="docutils literal notranslate"><span class="pre">report.ipynb</span></code> file and run all cells.</p></li>
 </ol>
 </div>
 </div>
