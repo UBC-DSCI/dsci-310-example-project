@@ -1,50 +1,33 @@
 # Milestone 2: predicting Airbnb nightly price from property and host data
 
-[![Python](https://img.shields.io/badge/python-3.9-blue)]()
-[![codecov](https://codecov.io/gh/TomasBeuzen/airbnb_prediction/branch/main/graph/badge.svg)](https://codecov.io/gh/TomasBeuzen/airbnb_prediction)
-[![Documentation Status](https://readthedocs.org/projects/airbnb_prediction/badge/?version=latest)](https://airbnb_prediction.readthedocs.io/en/latest/?badge=latest)
-[![Build](https://github.com/TomasBeuzen/airbnb_prediction/workflows/build/badge.svg)](https://github.com/TomasBeuzen/airbnb_prediction/actions/workflows/build.yml)
-
-Here we provide a package, `airbnb_prediction`, containing functionality to build a regression model to predict the nightly price of Airbnb properties using characteristics of the property and host (price, bedrooms, host response rate, etc.).
+Here we attempt to build a regression model to predict the nightly price of Airbnb properties using characteristics of the property and host (price, bedrooms, host response rate, etc.).
 
 ## Contents
 
-In this project, we have abstracted code and documentation required to run our analysis into a package `airbnb_prediction`. As a result, our analysis is self-contained, transparent about dependencies, and easy to test and distribute (if desired).
+In this directory, we have abstracted code from our original Jupyter notebook analysis into Python modules in a `src` folder. Our report now imports code from these modules (instead of containing code within the report itself), making it cleaner and more concise. With our code abstracted into modules, it is now also easier to test. We have therefore also created a `test` folder containing unit tests for our code.
 
-## Installation
+## Usage
 
-The package can be installed using `poetry`:
+Follow the steps below to reproduce the analysis.
 
-    ```bash
-    poetry install
-    ```
 
-### Rendering report and documentation
-
-Functionality of `airbnb_prediction` is demonstrated in the documentation, which can be found at: `docs/_build/html/index.html`.
-
-To build the documentation from source, run the following from the project root:
-
-    ```bash
-    make html -C docs
-    ```
-
-### Running tests
-
-To run package tests, run the following from the project root:
+1. Build Docker image:
 
     ```sh
+    docker build -t airbnb-analysis .
+    ```
+
+2. Run a new container from this directory using the following command:
+
+    ```sh
+    docker run -it -p 8888:8888 -v "${PWD}":/home/jovyan/${PWD##*/} --rm airbnb-analysis
+    ```
+
+3. (Optional) In the initialized Jupyter environment, open a new terminal and run tests using `pytest`:
+
+    ```sh
+    cd milestone-1
     pytest tests/
     ```
 
-## Dependencies
-
-Dependencies are listed in the `pyproject.toml` file. The exact versions of all dependencies used to develop the package in its current state are listed in `poetry.lock`.
-
-## Contributors
-
-We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/TomasBeuzen/airbnb_prediction/graphs/contributors).
-
-### Credits
-
-This package was created with Cookiecutter and the UBC-MDS/cookiecutter-ubc-mds project template, modified from the [pyOpenSci/cookiecutter-pyopensci](https://github.com/pyOpenSci/cookiecutter-pyopensci) project template and the [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
+4. If tests pass successfuly, find and open the `report.ipynb` file and run all cells.
